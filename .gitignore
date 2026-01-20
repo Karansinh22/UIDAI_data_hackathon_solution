@@ -1,5 +1,5 @@
 # Models
-models/demand_forecaster.joblib
+# demand_forecaster.joblib is now compressed and pushed normally
 # models/*.joblib  <-- Allow other models
 # models/*.pkl
 

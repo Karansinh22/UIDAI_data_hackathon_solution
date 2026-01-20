@@ -57,7 +57,7 @@ y1 = df_ml['total_updates']
 model1 = RandomForestRegressor(n_estimators=100, random_state=42)
 model1.fit(X1, y1)
 
-joblib.dump(model1, 'models/demand_forecaster.joblib')
+joblib.dump(model1, 'models/demand_forecaster.joblib', compress=3)
 joblib.dump(le, 'models/state_encoder.joblib')
 
 
@@ -85,7 +85,7 @@ y3 = state_agg['recommended_centers']
 model3 = Ridge()
 model3.fit(X3, y3)
 
-joblib.dump(model3, 'models/infra_optimizer.joblib')
+joblib.dump(model3, 'models/infra_optimizer.joblib', compress=3)
 
 
 # --- MODEL 4: Anomaly Spike Warning ---
@@ -103,6 +103,6 @@ y4 = df4['spike_label']
 model4 = RandomForestClassifier(n_estimators=50, random_state=42)
 model4.fit(X4, y4)
 
-joblib.dump(model4, 'models/spike_warning.joblib')
+joblib.dump(model4, 'models/spike_warning.joblib', compress=3)
 
 print("✅ All Strategic ML Models Trained and Saved in /models/")

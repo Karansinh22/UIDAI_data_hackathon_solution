@@ -482,7 +482,7 @@ elif page == "🤖 Strategic ML Insights":
     
         with t1:
             if model_demand is None:
-                st.warning("⚠️ Demand Forecaster model (`demand_forecaster.joblib`) not found. This model is >100MB and must be uploaded via Git LFS or manually.")
+                st.warning("⚠️ Demand Forecaster model not found. Please ensure `models/demand_forecaster.joblib` exists.")
             else:
                 c1, c2 = st.columns(2)
                 sel_state = c1.selectbox("Region", sorted(le_state.classes_))
