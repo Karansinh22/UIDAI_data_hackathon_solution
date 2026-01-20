@@ -161,7 +161,7 @@ pop_data = {
     'Chandigarh': 1.2, 'Mizoram': 1.2, 'Sikkim': 0.69
 }
 
-@st.cache_resource
+@st.cache_resource(ttl=3600) # Added TTL to force refresh
 def load_models():
     model_demand, model_infra, model_spike, le_state = None, None, None, None
     try:
