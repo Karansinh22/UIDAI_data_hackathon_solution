@@ -1,0 +1,25 @@
+=== 04_anomaly_detection_analysis.ipynb Analytical Insights ===
+
+Executing notebook: notebooks/analysis\04_anomaly_detection_analysis.ipynb
+Running cell 2...
+Libraries imported.
+Running cell 4...
+Data loaded.
+Running cell 6...
+Running cell 8...
+Found 915 anomalous records.
+                           state  ... enr_z_score
+1      Andaman & Nicobar Islands  ...    0.411650
+20   Andaman and Nicobar Islands  ...    2.011930
+239               Andhra Pradesh  ...    3.267807
+335               Andhra Pradesh  ...    2.806582
+338               Andhra Pradesh  ...    1.192295
+422               Andhra Pradesh  ...    3.232328
+463               Andhra Pradesh  ...    2.505012
+555               Andhra Pradesh  ...    5.236882
+556               Andhra Pradesh  ...    2.132484
+564               Andhra Pradesh  ...    5.822283
+
+[10 rows x 5 columns]
+Running cell 10...
+Notebook execution completed successfully.

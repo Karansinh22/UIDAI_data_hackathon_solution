@@ -1,0 +1,15 @@
+# Models
+models/demand_forecaster.joblib
+models/*.joblib
+models/*.pkl
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# OS files
+.DS_Store
+Thumbs.db

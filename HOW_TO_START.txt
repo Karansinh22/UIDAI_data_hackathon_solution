@@ -1,0 +1,73 @@
+================================================================================
+   🇮🇳  AADHAAR PULSE - Strategic Analytics Dashboard (Hackathon Submission)  🇮🇳
+================================================================================
+
+WELCOME!
+This project analyzes 5 Million+ Aadhaar records to provide strategic insights for UIDAI.
+It includes a full data pipeline, Machine Learning predictive models, and an interactive Dashboard.
+
+================================================================================
+   🚀  QUICK START GUIDE (Run these commands)
+================================================================================
+
+STEP 1: INSTALL DEPENDENCIES
+----------------------------
+Make sure you have Python 3.10+ installed.
+Run the following command in your terminal:
+
+    pip install streamlit pandas numpy plotly seaborn matplotlib scikit-learn requests joblib nbformat ipykernel kaleido colorama
+
+STEP 2: GENERATE MODELS & DATA (Optional but Recommended)
+---------------------------------------------------------
+The project comes with pre-trained models and processed data. 
+However, if you want to regenerate everything from scratch, run:
+    
+    # On Windows:
+    .\run_all.bat
+    
+    # On Mac/Linux:
+    bash run_all.sh
+
+(This runs all notebooks, processes data, and retrains the ML models.)
+
+STEP 3: LAUNCH THE DASHBOARD 🏆
+-------------------------------
+This is the main interactive application. Run this command:
+
+    streamlit run dashboard.py
+    
+    # OR if that doesn't work:
+    python -m streamlit run dashboard.py
+
+--> This will open http://localhost:8501 in your browser.
+
+================================================================================
+   📂  PROJECT STRUCTURE
+================================================================================
+
+/ (Root)   
+  |-- dashboard.py           --> MAIN APP (Run this!)
+  |-- HOW_TO_START.txt       --> You are reading this.
+  |-- EXECUTIVE_SUMMARY.md   --> 1-Page Summary for Judges.
+  |-- POLICY_RECOMMENDATIONS.md -> Strategic inputs for UIDAI.
+  |-- README.md              --> Technical Documentation.
+
+/notebooks
+  |-- /preprocessing         --> Cleaning raw data (01-06).
+  |-- /analysis              --> Generating insights (01-09).
+  |-- 10_ml_training.py      --> Script that trains the Predictive Models.
+
+/models                      --> Contains saved .joblib ML models.
+/processed_data              --> Cleaned CSV files used by the dashboard.
+/visualizations              --> Static PNG exports of all charts.
+
+================================================================================
+   🤖  FEATURES TO CHECKOUT (For Judges)
+================================================================================
+1.  "Strategic ML Insights" (Page 11) - Try the Interactive Predictors!
+2.  "Geographic Heatmaps" (Page 10)   - See the National Service visualizer.
+3.  "Anomaly Detection" (Page 5)      - See how we catch fraud risks.
+
+================================================================================
+   © 2026 AadhaarPulse Team  |  Built for Impact
+================================================================================

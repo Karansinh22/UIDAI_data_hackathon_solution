@@ -1,0 +1,23 @@
+=== 05_predictive_analytics_analysis.ipynb Analytical Insights ===
+
+Executing notebook: notebooks/analysis\05_predictive_analytics_analysis.ipynb
+Running cell 2...
+Libraries imported.
+Running cell 4...
+Data loaded.
+Running cell 6...
+Model R^2 score: 0.6230
+Running cell 8...
+Top 10 Districts with Higher-than-Expected Update Demand:
+             state          district  total_enrollments      residual
+5586         Delhi  North West Delhi             2899.0  84217.829155
+5606         Delhi       South Delhi             1792.0  67771.139166
+5610         Delhi       South Delhi             2622.0  67019.262644
+5579         Delhi  North West Delhi             1387.0  60354.837951
+5571         Delhi  North East Delhi             7437.0  59893.954871
+4293         Bihar        Kishanganj             2270.0  57335.492205
+5341  Chhattisgarh        Mahasamund              656.0  57199.743658
+5346  Chhattisgarh        Mahasamund              701.0  56381.666015
+5573         Delhi  North West Delhi             1018.0  56140.274621
+5562         Delhi       North Delhi             1355.0  54630.404274
+Notebook execution completed successfully.
