@@ -163,14 +163,19 @@ pop_data = {
 
 @st.cache_resource
 def load_models():
+    model_demand, model_infra, model_spike, le_state = None, None, None, None
     try:
-        model_demand = joblib.load('models/demand_forecaster.joblib')
-        model_infra = joblib.load('models/infra_optimizer.joblib')
-        model_spike = joblib.load('models/spike_warning.joblib')
-        le_state = joblib.load('models/state_encoder.joblib')
-        return model_demand, model_infra, model_spike, le_state
+        if os.path.exists('models/demand_forecaster.joblib'):
+            model_demand = joblib.load('models/demand_forecaster.joblib')
+        if os.path.exists('models/infra_optimizer.joblib'):
+            model_infra = joblib.load('models/infra_optimizer.joblib')
+        if os.path.exists('models/spike_warning.joblib'):
+            model_spike = joblib.load('models/spike_warning.joblib')
+        if os.path.exists('models/state_encoder.joblib'):
+            le_state = joblib.load('models/state_encoder.joblib')
     except Exception as e:
-        return None, None, None, None
+        st.error(f"Error loading models: {e}")
+    return model_demand, model_infra, model_spike, le_state
 
 # Sidebar navigation
 st.sidebar.header("📊 Analysis Modules")

@@ -1,7 +1,7 @@
 # Models
 models/demand_forecaster.joblib
-models/*.joblib
-models/*.pkl
+# models/*.joblib  <-- Allow other models
+# models/*.pkl
 
 # Python
 __pycache__/
