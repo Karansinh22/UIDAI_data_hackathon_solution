@@ -474,55 +474,55 @@ elif page == "🤖 Strategic ML Insights":
         model_demand, model_infra, model_spike, le_state = load_models()
         
         if model_demand is None:
-            st.warning("⚠️ Models not found locally. Please run `python notebooks/analysis/10_ml_training.py` to generate them.")
+            st.warning("⚠️ Models not found. To use this tab, ensure the trained models are present in the `models/` directory.")
         else:
             t1, t2, t3 = st.tabs(["📈 Future Forecast", "🏥 Infrastructure", "🚩 Risk/Spike Warning"])
         
-        with t1:
-            c1, c2 = st.columns(2)
-            sel_state = c1.selectbox("Region", sorted(le_state.classes_))
-            t_year = c2.slider("Forecast Year", 2025, 2030, 2025)
-            
-            # Dynamic defaults based on state
-            curr_pop = float(geo_df[geo_df['state_clean'] == sel_state]['total_enrollments'].sum() / 1000000 * 1.05)
-            curr_enr = int(geo_df[geo_df['state_clean'] == sel_state]['total_enrollments'].sum())
-            
-            pop_in = c1.number_input("Projected Population (Millions)", value=curr_pop, step=0.1)
-            enr_in = c2.number_input("Current Enrollment Base", value=curr_enr, step=1000)
-            
-            X_in = pd.DataFrame({'state_enc': [le_state.transform([sel_state])[0]], 'pop_millions': [pop_in], 'year': [t_year], 'total_enrollments': [enr_in]})
-            pred = model_demand.predict(X_in)[0]
-            st.metric(f"Predicted Demand ({t_year})", f"{pred:,.0f} Updates", f"Budget: ₹{pred*50/1000000:.2f}M")
-            
-        with t2:
-            c3, c4 = st.columns(2)
-            sel_infra = c3.selectbox("Region for Infra", sorted(le_state.classes_), key='inf_st')
-            
-            # Dynamic defaults
-            def_pop = float(geo_df[geo_df['state_clean'] == sel_infra]['total_enrollments'].sum() / 1000000)
-            def_upd = int(geo_df[geo_df['state_clean'] == sel_infra]['total_updates'].sum())
-            
-            pop_inf = c3.number_input("Population (Millions)", value=def_pop, key='inf_pop')
-            upd_inf = c4.number_input("Annual Update Volume", value=def_upd, key='inf_upd')
-            
-            rec = model_infra.predict(pd.DataFrame({'state_enc': [le_state.transform([sel_infra])[0]], 'pop_millions': [pop_inf], 'total_updates': [upd_inf]}))[0]
-            st.metric("Recommended Centers (ASKs)", f"{int(rec)} Unit(s)", "Optimal Capacity")
-            
-        with t3:
-            c5, c6, c7 = st.columns(3)
-            ez = c5.slider("Enrollment Z-Score", 0.0, 5.0, 1.5, help="Standard deviations from mean")
-            dz = c6.slider("Update Z-Score", 0.0, 5.0, 1.0)
-            total_e = c7.number_input("Daily Enrollments", value=1000, step=100)
-            
-            prob = model_spike.predict_proba(pd.DataFrame({'enr_z_score': [ez], 'demo_z_score': [dz], 'total_enrollments': [total_e]}))[0][1]
-            st.metric("Spike Probability", f"{prob*100:.1f}%")
-            
-            if prob > 0.7: 
-                st.error("🚨 CRITICAL RISK: High probability of anomalous surge.")
-            elif prob > 0.4:
-                st.warning("⚠️ ELEVATED RISK: Monitor closely.")
-            else:
-                st.success("✅ LOW RISK: Normal activity patterns.")
+            with t1:
+                c1, c2 = st.columns(2)
+                sel_state = c1.selectbox("Region", sorted(le_state.classes_))
+                t_year = c2.slider("Forecast Year", 2025, 2030, 2025)
+                
+                # Dynamic defaults based on state
+                curr_pop = float(geo_df[geo_df['state_clean'] == sel_state]['total_enrollments'].sum() / 1000000 * 1.05)
+                curr_enr = int(geo_df[geo_df['state_clean'] == sel_state]['total_enrollments'].sum())
+                
+                pop_in = c1.number_input("Projected Population (Millions)", value=curr_pop, step=0.1)
+                enr_in = c2.number_input("Current Enrollment Base", value=curr_enr, step=1000)
+                
+                X_in = pd.DataFrame({'state_enc': [le_state.transform([sel_state])[0]], 'pop_millions': [pop_in], 'year': [t_year], 'total_enrollments': [enr_in]})
+                pred = model_demand.predict(X_in)[0]
+                st.metric(f"Predicted Demand ({t_year})", f"{pred:,.0f} Updates", f"Budget: ₹{pred*50/1000000:.2f}M")
+                
+            with t2:
+                c3, c4 = st.columns(2)
+                sel_infra = c3.selectbox("Region for Infra", sorted(le_state.classes_), key='inf_st')
+                
+                # Dynamic defaults
+                def_pop = float(geo_df[geo_df['state_clean'] == sel_infra]['total_enrollments'].sum() / 1000000)
+                def_upd = int(geo_df[geo_df['state_clean'] == sel_infra]['total_updates'].sum())
+                
+                pop_inf = c3.number_input("Population (Millions)", value=def_pop, key='inf_pop')
+                upd_inf = c4.number_input("Annual Update Volume", value=def_upd, key='inf_upd')
+                
+                rec = model_infra.predict(pd.DataFrame({'state_enc': [le_state.transform([sel_infra])[0]], 'pop_millions': [pop_inf], 'total_updates': [upd_inf]}))[0]
+                st.metric("Recommended Centers (ASKs)", f"{int(rec)} Unit(s)", "Optimal Capacity")
+                
+            with t3:
+                c5, c6, c7 = st.columns(3)
+                ez = c5.slider("Enrollment Z-Score", 0.0, 5.0, 1.5, help="Standard deviations from mean")
+                dz = c6.slider("Update Z-Score", 0.0, 5.0, 1.0)
+                total_e = c7.number_input("Daily Enrollments", value=1000, step=100)
+                
+                prob = model_spike.predict_proba(pd.DataFrame({'enr_z_score': [ez], 'demo_z_score': [dz], 'total_enrollments': [total_e]}))[0][1]
+                st.metric("Spike Probability", f"{prob*100:.1f}%")
+                
+                if prob > 0.7: 
+                    st.error("🚨 CRITICAL RISK: High probability of anomalous surge.")
+                elif prob > 0.4:
+                    st.warning("⚠️ ELEVATED RISK: Monitor closely.")
+                else:
+                    st.success("✅ LOW RISK: Normal activity patterns.")
 
     except Exception as e:
         st.error(f"Error loading ML models: {e}")
@@ -533,6 +533,7 @@ st.markdown("<br><hr>", unsafe_allow_html=True)
 st.markdown("""
 <div style='text-align: center; color: #6c757d; font-size: 0.8rem;'>
     <b>AadhaarPulse™ | National Strategic Data Dashboard</b><br>
-    Built for UIDAI Data Hackathon | Advanced Agentic Analytics Engine | © 2026
+    Built for UIDAI Data Hackathon | Advanced Agentic Analytics Engine | © 2026<br>
+    <b>developed by KD</b>
 </div>
 """, unsafe_allow_html=True)
