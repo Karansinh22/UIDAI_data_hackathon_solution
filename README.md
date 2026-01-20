@@ -166,7 +166,7 @@ This project is for **educational and hackathon purposes only**.
 
 ## 👥 Team
 
-**Karan Desai** - Data Analysis & Visualization
+**Karansinh Desai** - Data Analysis & Visualization
 
 ---
 
@@ -178,10 +178,5 @@ This project is for **educational and hackathon purposes only**.
 
 ---
 
-## 📞 Contact
-
-For questions or collaboration: [Add your contact]
-
----
 
 **⭐ Star this repo if you found it helpful!**
