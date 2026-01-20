@@ -478,12 +478,12 @@ elif page == "🤖 Strategic ML Insights":
     try:
         model_demand, model_infra, model_spike, le_state = load_models()
         
-        if model_demand is None:
-            st.warning("⚠️ Models not found. To use this tab, ensure the trained models are present in the `models/` directory.")
-        else:
-            t1, t2, t3 = st.tabs(["📈 Future Forecast", "🏥 Infrastructure", "🚩 Risk/Spike Warning"])
-        
-            with t1:
+        t1, t2, t3 = st.tabs(["📈 Future Forecast", "🏥 Infrastructure", "🚩 Risk/Spike Warning"])
+    
+        with t1:
+            if model_demand is None:
+                st.warning("⚠️ Demand Forecaster model (`demand_forecaster.joblib`) not found. This model is >100MB and must be uploaded via Git LFS or manually.")
+            else:
                 c1, c2 = st.columns(2)
                 sel_state = c1.selectbox("Region", sorted(le_state.classes_))
                 t_year = c2.slider("Forecast Year", 2025, 2030, 2025)
@@ -498,8 +498,11 @@ elif page == "🤖 Strategic ML Insights":
                 X_in = pd.DataFrame({'state_enc': [le_state.transform([sel_state])[0]], 'pop_millions': [pop_in], 'year': [t_year], 'total_enrollments': [enr_in]})
                 pred = model_demand.predict(X_in)[0]
                 st.metric(f"Predicted Demand ({t_year})", f"{pred:,.0f} Updates", f"Budget: ₹{pred*50/1000000:.2f}M")
-                
-            with t2:
+            
+        with t2:
+            if model_infra is None:
+                st.warning("⚠️ Infrastructure Optimizer model not found.")
+            else:
                 c3, c4 = st.columns(2)
                 sel_infra = c3.selectbox("Region for Infra", sorted(le_state.classes_), key='inf_st')
                 
@@ -512,8 +515,11 @@ elif page == "🤖 Strategic ML Insights":
                 
                 rec = model_infra.predict(pd.DataFrame({'state_enc': [le_state.transform([sel_infra])[0]], 'pop_millions': [pop_inf], 'total_updates': [upd_inf]}))[0]
                 st.metric("Recommended Centers (ASKs)", f"{int(rec)} Unit(s)", "Optimal Capacity")
-                
-            with t3:
+            
+        with t3:
+            if model_spike is None:
+                st.warning("⚠️ Spike Warning model not found.")
+            else:
                 c5, c6, c7 = st.columns(3)
                 ez = c5.slider("Enrollment Z-Score", 0.0, 5.0, 1.5, help="Standard deviations from mean")
                 dz = c6.slider("Update Z-Score", 0.0, 5.0, 1.0)
