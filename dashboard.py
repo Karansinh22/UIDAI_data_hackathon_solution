@@ -228,7 +228,7 @@ if page == "🏠 Overview":
                      color_continuous_scale='Blues',
                      template=TEMPLATE)
         fig.update_layout(showlegend=False, height=450)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with col_c2:
         st.subheader("🎯 Key Performance Tags")
@@ -265,7 +265,7 @@ elif page == "🗺️ Geographic Analysis":
                      color_continuous_scale='Blues',
                      template=TEMPLATE)
         fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with col_g2:
         st.markdown("### 🔗 Correlation Analysis")
@@ -276,7 +276,7 @@ elif page == "🗺️ Geographic Analysis":
                          template=TEMPLATE,
                          color_discrete_sequence=['#4361ee'],
                          labels={'total_enrollments': 'Enrollments', 'total_updates': 'Updates'})
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
 # Page 2: Age Demographics
 elif page == "👶 Age Demographics":
@@ -292,7 +292,7 @@ elif page == "👶 Age Demographics":
                      hole=0.4,
                      color_discrete_sequence=['#4cc9f0', '#4895ef', '#4361ee'],
                      template=TEMPLATE)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with col_a2:
         st.markdown("### 📊 Update Demand by Cohort")
@@ -305,7 +305,7 @@ elif page == "👶 Age Demographics":
                      barmode='group',
                      color_discrete_sequence=['#4361ee', '#4cc9f0'],
                      template=TEMPLATE)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
 # Page 3: Update Behavior
 elif page == "🔄 Update Behavior":
@@ -320,7 +320,7 @@ elif page == "🔄 Update Behavior":
         fig = px.pie(values=totals, names=['Demographic', 'Biometric'],
                      color_discrete_sequence=['#f72585', '#7209b7'],
                      template=TEMPLATE)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with col_u2:
         st.markdown("### 🔝 Intensity Leaders (District)")
@@ -331,7 +331,7 @@ elif page == "🔄 Update Behavior":
                      color_continuous_scale='Sunset',
                      template=TEMPLATE)
         fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
 # Page 4: Anomaly Detection
 elif page == "🚨 Anomaly Detection":
@@ -350,7 +350,7 @@ elif page == "🚨 Anomaly Detection":
                      color_discrete_sequence=['#4361ee'],
                      template=TEMPLATE)
         fig.update_xaxes(tickangle=45)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with col_an2:
         st.markdown("### 🧿 Anomaly Clustering (Z-Score)")
@@ -360,7 +360,7 @@ elif page == "🚨 Anomaly Detection":
                          hover_data=['state_clean', 'district'],
                          template=TEMPLATE,
                          opacity=0.6)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
 # Page 5: Predictive Analytics
 elif page == "🔮 Predictive Analytics":
@@ -379,7 +379,7 @@ elif page == "🔮 Predictive Analytics":
                          template=TEMPLATE,
                          color_discrete_sequence=['#4361ee'],
                          opacity=0.4)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with col_p2:
         st.markdown("### 📊 Top 10 Service Gaps")
@@ -391,7 +391,7 @@ elif page == "🔮 Predictive Analytics":
         fig = px.bar(top_res, x='residual', y='district', orientation='h',
                      color='residual', color_continuous_scale='Reds', template=TEMPLATE)
         fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
 # Page 6: Pincode Analysis
 elif page == "📍 Pincode Analysis":
@@ -404,7 +404,7 @@ elif page == "📍 Pincode Analysis":
     fig = px.histogram(pincode_df, x='total_activity', nbins=100,
                        template=TEMPLATE, color_discrete_sequence=['#3a0ca3'],
                        labels={'total_activity': 'Activity per Pincode'})
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 # Page 7: Advanced Insights
 elif page == "🧠 Advanced Insights":
@@ -417,7 +417,7 @@ elif page == "🧠 Advanced Insights":
                    'demo_age_5_17': 'Demo_Y', 'demo_age_17_': 'Demo_A', 'bio_age_5_17': 'Bio_Y', 'bio_age_17_': 'Bio_A'}
         corr = pincode_df[list(mapping.keys())].rename(columns=mapping).corr()
         fig = px.imshow(corr, text_auto='.2f', color_continuous_scale='RdBu_r', template=TEMPLATE)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     
     with col_adv2:
         st.markdown("### ⚖️ State Service Index")
@@ -425,7 +425,7 @@ elif page == "🧠 Advanced Insights":
         st_idx = pincode_df.groupby('state_clean')['u_idx'].mean().sort_values()
         fig = px.bar(x=st_idx.values, y=st_idx.index, orientation='h', color=st_idx.values, color_continuous_scale='Teal', template=TEMPLATE)
         fig.add_vline(x=1, line_dash='dash', line_color='red')
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
 # Page 8: Geographic Heatmaps
 elif page == "🌍 Geographic Heatmaps":
@@ -439,12 +439,12 @@ elif page == "🌍 Geographic Heatmaps":
         fig = px.choropleth(state_metrics, geojson=india_geojson, featureidkey='properties.NAME_1',
                             locations='state_clean', color='total_enrollments', color_continuous_scale="Purp", template=TEMPLATE)
         fig.update_geos(fitbounds="locations", visible=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     with tab_h2:
         fig = px.choropleth(state_metrics, geojson=india_geojson, featureidkey='properties.NAME_1',
                             locations='state_clean', color='total_updates', color_continuous_scale="OrRd", template=TEMPLATE)
         fig.update_geos(fitbounds="locations", visible=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
 # Page 9: Population Penetration
 elif page == "👥 Population Penetration":
@@ -462,12 +462,12 @@ elif page == "👥 Population Penetration":
         fig = px.choropleth(state_activity, geojson=india_geojson, featureidkey='properties.NAME_1',
                             locations='state_clean', color='per_1000', color_continuous_scale="Viridis", template=TEMPLATE)
         fig.update_geos(fitbounds="locations", visible=False)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
     with col_pop2:
         top_pop = state_activity.sort_values('per_1000', ascending=True)
         fig = px.bar(top_pop, x='per_1000', y='state_clean', orientation='h', color='per_1000', color_continuous_scale='Viridis', template=TEMPLATE)
         fig.update_layout(showlegend=False, height=700)
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
 # Page 10: Strategic ML Insights
 elif page == "🤖 Strategic ML Insights":
